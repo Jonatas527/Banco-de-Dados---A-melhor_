@@ -1,0 +1,54 @@
+
+CREATE FUNCTION FATORIAL(n INT)
+RETURNS INT
+BEGIN
+    DECLARE resultado INT DEFAULT 1;
+    DECLARE i INT;
+    SET i = 1;
+    WHILE i <= n DO
+        SET resultado = resultado * i;
+        SET i = i + 1;
+    END WHILE;
+    RETURN resultado;
+
+CREATE FUNCTION F_EXPONENCIAL(base INT, expoente INT)
+RETURNS INT
+BEGIN
+    DECLARE resultado INT DEFAULT 1;
+    DECLARE i INT;
+    SET i = 1;
+    WHILE i <= expoente DO
+        SET resultado = resultado * base;
+        SET i = i + 1;
+    END WHILE;
+    RETURN resultado;
+
+CREATE FUNCTION E_PALINDROMO(palavra VARCHAR(255))
+RETURNS INT
+BEGIN
+    DECLARE tamanho INT;
+    DECLARE i INT;
+    DECLARE j INT;
+    SET tamanho = LENGTH(palavra);
+    SET i = 1;
+    SET j = tamanho;
+    WHILE i < j DO
+        IF SUBSTRING(palavra, i, 1) != SUBSTRING(palavra, j, 1) THEN
+            RETURN 0;
+        END IF;
+        SET i = i + 1;
+        SET j = j - 1;
+    END WHILE;
+    RETURN 1;
+
+
+DELIMITER ;
+
+SELECT FATORIAL(5); -- Resultado: 120
+
+SELECT F_EXPONENCIAL(2, 3); -- Resultado: 8
+
+SELECT E_PALINDROMO('radar'); -- Resultado: 1
+
+SELECT E_PALINDROMO('hello'); -- Resultado: 0
+
